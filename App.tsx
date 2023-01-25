@@ -6,7 +6,7 @@ import ManageExpense from './screens/ManageExpenses';
 import RecentExpense from './screens/RecentExpenses';
 import AllExpnese from './screens/AllExpenses';
 import {GlobalStyles} from './constants/styles';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Image, View} from 'react-native';
 
 const Stack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -14,7 +14,7 @@ const BottomTabs = createBottomTabNavigator();
 const ExpensesOverView = () => {
   return (
     <BottomTabs.Navigator
-      //to change the color of the header we use the screenOptions.
+      // to change the color of the header we use the screenOptions.
       screenOptions={{
         headerStyle: {backgroundColor: GlobalStyles.colors.primary500},
         headerTintColor: 'white',
@@ -27,9 +27,13 @@ const ExpensesOverView = () => {
         options={{
           title: 'Recent Expenses',
           tabBarLabel: 'Recent',
-          tabBarIcon: ({color, size}) => {
-            <Ionicons name="home-outline" size={size} color={color} />;
-          },
+          tabBarIcon: () => (
+            <View>
+              <Image
+                source={require('../MyAwesomeProject/assets/images/allExpenses.png')}
+              />
+            </View>
+          ),
         }}
       />
       <BottomTabs.Screen
@@ -38,8 +42,12 @@ const ExpensesOverView = () => {
         options={{
           title: 'All Expenses',
           tabBarLabel: 'All',
-          tabBarIcon: ({color, size}) => (
-            <Ionicons name="hourglass" size={size} color={color} />
+          tabBarIcon: () => (
+            <View>
+              <Image
+                source={require('../MyAwesomeProject/assets/images/recentExpenses.png')}
+              />
+            </View>
           ),
         }}
       />
@@ -57,6 +65,7 @@ const App = () => {
             component={ExpensesOverView}
             options={{headerShown: false}}
           />
+
           <Stack.Screen name="ManageExpense" component={ManageExpense} />
         </Stack.Navigator>
       </NavigationContainer>
