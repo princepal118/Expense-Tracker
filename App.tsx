@@ -6,7 +6,8 @@ import ManageExpense from './screens/ManageExpenses';
 import RecentExpense from './screens/RecentExpenses';
 import AllExpnese from './screens/AllExpenses';
 import {GlobalStyles} from './constants/styles';
-import {Image, View} from 'react-native';
+import {Alert, Image, View} from 'react-native';
+import IconButton from './components/UI/IconButton';
 
 const Stack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -15,18 +16,28 @@ const ExpensesOverView = () => {
   return (
     <BottomTabs.Navigator
       // to change the color of the header we use the screenOptions.
-      screenOptions={{
+      screenOptions={({navigation}) => ({
         headerStyle: {backgroundColor: GlobalStyles.colors.primary500},
         headerTintColor: 'white',
         tabBarStyle: {backgroundColor: GlobalStyles.colors.primary500},
         tabBarActiveTintColor: GlobalStyles.colors.accent500,
-      }}>
+        headerRight: ({tintColor}) => (
+          <IconButton
+            onPress={() => {
+              console.log('object :>> ');
+              navigation.navigate('ManageExpense');
+            }}
+            color={tintColor}
+          />
+        ),
+      })}>
       <BottomTabs.Screen
         name="Recent Expenses"
         component={RecentExpense}
         options={{
           title: 'Recent Expenses',
           tabBarLabel: 'Recent',
+
           tabBarIcon: () => (
             <View>
               <Image
