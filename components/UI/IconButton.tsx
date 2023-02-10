@@ -1,17 +1,19 @@
 import {Image, Pressable, StyleSheet, TouchableOpacity} from 'react-native';
-
-// interface ImageProps {
-//   //   color: number;
-//   onPress: () => void;
-// }
-const IconButton = ({onPress}: any) => {
-  //   console.log('props.color :>> ', props.color);
+interface ImageProps {
+  //   color: number;
+  onPress: () => void;
+  icon: string;
+}
+const IconButton = ({onPress, icon}: ImageProps) => {
+  const logo = require('../../assets/images/delete.png');
+  const plusImage = require('../../assets/images/plusBlack.png');
   return (
-    <Pressable
-      onPress={onPress}
-      style={({pressed}) => pressed && style.pressedButton}>
-      <TouchableOpacity style={style.buttonContainer}>
-        <Image source={require('../../assets/images/recentExpenses.png')} />
+    <Pressable>
+      <TouchableOpacity style={style.buttonContainer} onPress={onPress}>
+        <Image
+          source={icon == 'trash' ? logo : plusImage}
+          style={{width: 20, height: 20}}
+        />
       </TouchableOpacity>
     </Pressable>
   );
